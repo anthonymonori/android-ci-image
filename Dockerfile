@@ -8,12 +8,11 @@ CMD ["/sbin/my_init"]
 ## Set up Android related environment vars
 ENV ANDROID_SDK_URL="https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip" \
     ANDROID_HOME="/opt/android" \
-    RUBY_MAJOR=2.1 \
-    RUBY_VERSION=2.1.9 \
-    RUBY_DOWNLOAD_SHA256=034cb9c50676d2c09b3b6cf5c8003585acea05008d9a29fa737c54d52c1eb70c \
-    RUBYGEMS_VERSION=2.6.6 \
-    BUNDLER_VERSION=1.12.5 \
-    FASTLANE_VERSION=2.62.0
+    RUBY_MAJOR=2.2 \
+    RUBY_VERSION=2.2.8 \
+    RUBY_DOWNLOAD_SHA256=8f37b9d8538bf8e50ad098db2a716ea49585ad1601bbd347ef84ca0662d9268a \
+    RUBYGEMS_VERSION=2.7.2 \
+    FASTLANE_VERSION=2.64.0
 
 ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS_VERSION
 
@@ -60,9 +59,6 @@ RUN set -ex \
     && apt-get autoremove -y \
     && apt-get clean
 
-# Install bundler
-RUN gem install bundler --version "$BUNDLER_VERSION"
-
 # install things globally, for great justice and don't create ".bundle" in all our apps
 ENV GEM_HOME /usr/local/bundle
 ENV BUNDLE_PATH="$GEM_HOME" \
@@ -75,11 +71,6 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 
 # Install fastlane
 RUN gem install fastlane -NV -v "$FASTLANE_VERSION"
-
-# Copy various scripts over
-COPY scripts /opt/scripts
-RUN chmod 755 /opt/scripts/android-accept-licenses.sh
-RUN chmod 755 /opt/scripts/android-wait-for-emulator.sh
 
 # Android SDKs
 RUN mkdir android \
@@ -106,11 +97,6 @@ COPY android-packages.txt /var/temp/android-packages.txt
 
 # Install SDK packages
 RUN sdkmanager --package_file="/var/temp/android-packages.txt" --channel=0 --verbose
-
-# Create emulators
-COPY create-devices.sh /opt/scripts/create-devices.sh
-RUN chmod 755 /opt/scripts/create-devices.sh
-RUN /opt/scripts/create-devices.sh
 
 # Cleaning
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
