@@ -2,11 +2,11 @@
 Container set up with build tools in order to run Android builds in a Docker setup.
 
 ## Contains
-- Ruby: 2.1.9
+- Ruby: 2.2.8
 - RubyGems: 2.6.6
 - Bundler: 1.12.5
-- Java8 JDK: _latest as-of 18.05.2017_
-- Fastlane: 2.33.0
+- Java8 JDK: _latest as-of 10.11.2017_
+- Fastlane: 2.64.0
 - [android-packages.txt](./android-packages.txt)
 - [dependencies.txt](./dependencies.txt)
 
@@ -37,19 +37,6 @@ dependencies {
 ```
 
 [Read more](https://developer.android.com/studio/intro/update.html#download-with-gradle)
-
-#### Running androidConnectedTest
-In your `.gitlab-ci.yml` file, add the following lines to ensure the virtual devices are started up:
-
-```
-- emulator <@DEVICE_NAME> -wipe-data -verbose -logcat '*:e *:w' -netfast -no-boot-anim -no-audio -no-window &&
-- /opt/scripts/android-wait-for-emulator.sh
-- adb shell input keyevent 82
-```
-Possible device names:
-- `@Nexus6P`
-
-_For the full list, please see [create-devices.sh](./create-devices.sh)_
 
 ## Build image
 ```
