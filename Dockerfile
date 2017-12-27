@@ -98,7 +98,9 @@ RUN mkdir "${ANDROID_HOME}/licenses" || true \
 COPY android-packages.txt /var/temp/android-packages.txt
 
 # Install SDK packages
-RUN sdkmanager --package_file="/var/temp/android-packages.txt" --channel=0 --verbose
+RUN mkdir ~/.android \
+    && touch ~/.android/repositories.cfg \
+    && sdkmanager --package_file="/var/temp/android-packages.txt" --channel=0 --sdk_root="$ANDROID_HOME" --verbose
 
 # Install Node.js 9 + npm + yarn
 RUN groupadd --gid 1000 node \
