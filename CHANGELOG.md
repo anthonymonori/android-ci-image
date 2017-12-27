@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.1
+
+- Added tools;26.1.1 in order to get hold of apkanalyzer
+
 ## 1.2.0
 
 - Adding Node.js, npm and yarn support
