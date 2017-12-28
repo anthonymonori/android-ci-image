@@ -4,10 +4,11 @@ Container set up with build tools in order to run Android builds in a Docker set
 
 ## Contains
 
+- Base: [phusion/baseimage](https://hub.docker.com/r/phusion/baseimage/)
 - Ruby: 2.2.8
 - RubyGems: 2.6.6
 - Bundler: 1.12.5
-- Java8 JDK: _latest as-of 10.11.2017_
+- Java8 JDK: _latest as-of 27.12.2017_
 - Fastlane: 2.64.0
 - Node.js: 9.3.0
 - Yarn: 1.3.2
@@ -19,7 +20,7 @@ Container set up with build tools in order to run Android builds in a Docker set
 ### Including this in your ci.yml
 
 ```Dockerfile
-image: anthonymonori/android-fastlane-image:latest
+image: anthonymonori/android-ci-image:latest
 ```
 
 _Note: Currently supporting Travis CI and GitLab CI._
@@ -28,11 +29,11 @@ _Note: Currently supporting Travis CI and GitLab CI._
 
 ```Shell
 docker login
-docker pull anthonymonori/android-fastlane-image:latest
-docker run -it -d -p [port]:[port-internal] --name [container-name] anthonymonori/android-fastlane-image:latest
+docker pull anthonymonori/android-ci-image:latest
+docker run -it -d -p <port>:<port-internal> --name <container-name> anthonymonori/android-ci-image:latest
 ```
 
-_Note: of course, you need to change `[port]`,`[port-internal]`,`[container-name]` to run the above command lines. You also might want to enable the `[port]` variable on whatever cloud solutions you are running._
+_Note: of course, you need to change \<port>,\<port-internal>,\<container-name> to run the above command lines. You also might want to enable the <port> variable on whatever cloud solutions you are running._
 
 ### Gradle
 
@@ -55,7 +56,7 @@ docker build .
 ## Deploy image
 
 ```Shell
-docker push anthonymonori/android-fastlane-image
+docker push anthonymonori/android-ci-image
 ```
 
 ## Problems
