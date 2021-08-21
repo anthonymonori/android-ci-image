@@ -1,3 +1,5 @@
+![Docker Pulls](https://img.shields.io/docker/pulls/anthonymonori/android-ci-image?label=docker%20pulls%20%28latest%29&style=flat-square) | ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/anthonymonori/android-ci-image?label=latest%20stable%20versioin&style=flat-square) | ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/anthonymonori/android-ci-image/latest?style=flat-square)
+
 # android-fastlane-image
 
 Container set up with build tools in order to run Android builds in a Docker setup.
